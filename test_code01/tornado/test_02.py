@@ -1,11 +1,6 @@
 import tornado.web
 import tornado.ioloop
 import tornado.httpserver
-import tornado.options
-from tornado.options import define, options
-
-define("port", default=8080, type=int)
-define("list", default=[], type=str, multiple=True)
 
 
 class IndexCode(tornado.web.RequestHandler):
@@ -19,11 +14,13 @@ url = [
 
 
 def main():
-    tornado.options.options.parse_command_line()
-    print("list:", options.list)
     my_app = tornado.web.Application(handlers=url)
+
+    # my_app.listen(8080)
+    # 实例化一个http服务器
     httpServer = tornado.httpserver.HTTPServer(my_app)
-    httpServer.listen(options.port)
+    httpServer.bind()
+    httpServer.start(num_processes)
 
     tornado.ioloop.IOLoop.current().start()
 

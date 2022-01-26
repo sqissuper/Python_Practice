@@ -6,13 +6,13 @@ import tornado.ioloop
 
 
 # 业务处理类
-class IndexCode(tornado.web.RequestHandler):
+class IndexHandler(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
         self.write("shiqiang is a perfect man!")
 
 
 url = [
-    (r'/api/v1/index_code', IndexCode)
+    (r'/api/v1/index_code', IndexHandler)
 ]
 
 
